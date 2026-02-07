@@ -1,0 +1,36 @@
+.task {
+    display: flex;
+    align-items: center;
+    gap: 8px;          /* расстояние между текстом и кнопкой */
+}
+
+.task--text {
+    max-width: 300px; /* ограничение текста */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+}
+
+.task-done {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.done-button {
+    width: 50px;
+    height: 30px;
+    background-color: orange;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-button {
+    width: 60px;
+    height: 30px;
+    background-color: rgb(255, 0, 0);
+    border: none;
+    cursor: pointer;
+}
+
+
