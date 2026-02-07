@@ -1,4 +1,4 @@
-import data from "./myTasks.js"
+const fileInput = document.querySelector(".button--export")
 
 const taskList = document.querySelector(".tasks__list")
 
@@ -8,7 +8,7 @@ const input = document.querySelector('.user-input__field')
 
 const importBtn = document.querySelector(".button--import")
 
-const exportBtn = document.querySelector(".button--export")
+// const exportBtn = document.querySelector(".button--export")
 
 
 function addTask(text, state = "active"){
@@ -98,12 +98,27 @@ importBtn.addEventListener("click", () => {
     downloadJSON(jsonString, "myTasks.json");
 })
 
-exportBtn.addEventListener("click", () => {
-    taskList.replaceChildren();
-    const exportedTasks = JSON.parse(data); 
+fileInput.addEventListener("change", () => {
+  const file = fileInput.files[0];
+  if (!file) return;
 
-    exportedTasks.tasks.forEach(task => {
-    addTask(task.text, task.state);
-    })
-})
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    try {
+      const tasks = JSON.parse(reader.result);
+
+      taskList.replaceChildren();
+
+      tasks.forEach(task => {
+        addTask(task.text, task.state);
+      });
+
+    } catch (err) {
+      alert("file is not valid");
+    }
+  };
+
+  reader.readAsText(file);
+});
 
